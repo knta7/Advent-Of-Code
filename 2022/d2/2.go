@@ -12,6 +12,7 @@ B X
 C Z`
 
 func main() {
+	defer common.Timer("main")()
 	year := "2022"
 	day := "2"
 	common.GetInput(year, day)

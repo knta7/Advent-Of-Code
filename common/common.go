@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 func GetInput(year string, day string) {
@@ -19,9 +20,13 @@ func GetInput(year string, day string) {
 	// # 4) Click click
 	// # 5) Click cookies
 	// # 6) Grab the value for session. Fill it in.
-	b_session, _ := os.ReadFile("./common/sessionCookie")
+	b_session, err := os.ReadFile("./common/sessionCookie")
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("Most likely missing sessionCookie file inside common, exiting")
+		panic(err)
+	}
 	session := string(b_session)
-	fmt.Println(session)
 	folder_path := fmt.Sprintf("./%v/inputs", year)
 	if _, err := os.Stat(folder_path); errors.Is(err, os.ErrNotExist) {
 		fmt.Println("Folder doesn't exists. Creating")
@@ -49,4 +54,12 @@ func GetInput(year string, day string) {
 	} else {
 		fmt.Printf("File %v already exists, skipping creation\n", file_name)
 	}
+}
+
+
+func Timer(name string) func() {
+    start := time.Now()
+    return func() {
+        fmt.Printf("%s took %v\n", name, time.Since(start))
+    }
 }

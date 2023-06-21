@@ -60,6 +60,7 @@ func getMaxThree_sort(in []int) (out int) {
 }
 
 func main() {
+	defer common.Timer("main")()
 	year := "2022"
 	day := "1"
 	common.GetInput(year, day)

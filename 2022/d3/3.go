@@ -15,7 +15,7 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw`
 
 func main() {
-
+	defer common.Timer("main")()
 	year := "2022"
 	day := "3"
 	common.GetInput(year, day)
@@ -109,7 +109,7 @@ func main() {
 			}
 		}
 
-		fmt.Printf("%v, %v, %v || %v \n", full_group, final[fmt.Sprint(i)], keyval, uniq)
+		// fmt.Printf("%v, %v, %v || %v \n", full_group, final[fmt.Sprint(i)], keyval, uniq)
 	}
 	// fmt.Println(final)
 

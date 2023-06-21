@@ -16,6 +16,7 @@ var data string = `2-4,6-8
 2-6,4-8`
 
 func main() {
+	defer common.Timer("main")()
 	year := "2022"
 	day := "4"
 	common.GetInput(year, day)
