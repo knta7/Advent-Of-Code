@@ -1,6 +1,5 @@
-/common/sessionCookie
-/20*/inputs/
-/20*/inputs/*
+sessionCookie
+inputs/
 /.idea/
 target/
 *.exe
