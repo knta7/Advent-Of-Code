@@ -1,4 +1,6 @@
 /common/sessionCookie
-/2022/inputs/
-/2022/inputs/*
+/20*/inputs/
+/20*/inputs/*
 /.idea/
+target/
+*.exe
