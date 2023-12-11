@@ -43,20 +43,21 @@ fn main() {
     let str_numbers = String::from("one,two,three,four,five,six,seven,eight,nine");
     let numbers: Vec<&str> = str_numbers.split(",").collect();
     for line in &mut input.lines() {
-        let mut vec_idx: Vec<usize> = Vec::new();
-        let mut chars : Vec<char> = line.trim().chars().collect();
+        let mut vec_idx: Vec<(usize, &str)> = Vec::new();
+        let mut chars: Vec<char> = line.trim().chars().collect();
+        let mut char_str: &String = &chars.iter().cloned().collect::<String>();
         for (pos, str_num) in numbers.iter().enumerate() {
-            // mut_line = mut_line.replace(str_num, format!("{}", pos + 1).as_str())
-            if let Some(idx) = line.find(str_num) {
-                vec_idx.push(idx);
-                chars[idx] = char::from_digit( (pos + 1) as u32, 10).unwrap();
-            }
+            let mut v: Vec<(usize, &str)> = char_str.match_indices(str_num).collect();
+            vec_idx.append(&mut v);
+        }
+
+        for ele in &vec_idx {
+            chars[ele.0] = char::from_digit((get_idx(numbers.clone(), ele.1) + 1) as u32, 10).unwrap();
         }
 
         let mut first_char = String::new();
         let mut last_char = String::new();
         for chr in &chars {
-            // println!("{}", chr.is_numeric());
             if chr.is_numeric() {
                 if first_char == String::new() {
                     first_char = chr.to_string();
@@ -67,11 +68,14 @@ fn main() {
 
         let val: u32 = format!("{first_char}{last_char}").parse().expect("Unable to parse combined chars");
         calibration_values.push(val);
-
-        // println!("{:?}", vec_idx);
-        // println!("{:?}", chars);
     }
-    // println!("{:?}", input);
     let sum: u32 = calibration_values.iter().sum();
     println!("Part 2: {:?}", sum);
+}
+
+fn get_idx(list: Vec<&str>, word: &str) -> usize {
+    if let Some(idx) = list.iter().position(|&x| x == word) {
+        return idx;
+    }
+    0
 }
