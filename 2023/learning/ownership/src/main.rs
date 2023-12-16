@@ -3,9 +3,9 @@ fn main() {
     // take ownership
     //
 
-    let string = String::from("testing");
-    take_ownership(string);
-    println!("{}", string);
+    // let string = String::from("testing");
+    // take_ownership(string);
+    // println!("{}", string);
 
     //
     // change
@@ -48,16 +48,20 @@ fn main() {
     // Test w int
     //
 
-//
-//   let mut y = 5;
-//
-//     let z = number(y);
-//
-//     println!("{}", z)
+
+    // let mut y = 5;
+    //
+    // let z = number(y);
+    //
+    // println!("{}", z)
+
+    let str_test = "testing".to_string();
+    let strs: &str = "testing".to_string().split("t").collect::<Vec<&str>>()[0];
+    println!("{}", strs);
 
 }
 
-fn take_ownership(s : String) {
+fn take_ownership(s: String) {
     println!("{}", s)
 }
 
